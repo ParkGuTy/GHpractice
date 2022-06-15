@@ -26,5 +26,22 @@ public class BoardService {
 	public int totalCount() {
 		return boardDAO.totalCount();
 	}
+
+	public List<CommentDTO> commentList(int b_no) {
+		return boardDAO.commentList(b_no);
+	}
+
+	public void commentWrite(CommentDTO dto) {
+		boardDAO.commentWrite(dto);
+	}
+
+	public void commentDelete(CommentDTO dto) {
+		boardDAO.commentDelete(dto);
+	}
+
+	public void commentUpdate(CommentDTO dto) {
+		boardDAO.commentUpdate(dto);
+	}
+
 	
 }

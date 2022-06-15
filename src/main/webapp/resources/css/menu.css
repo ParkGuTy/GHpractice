@@ -20,6 +20,7 @@ body {
 	box-sizing: border-box;
 	width: 300px;
 	position: fixed;
+	text-align: center;
 }
 
 #main {
@@ -40,9 +41,17 @@ body {
 	width: 100%;
 	margin: 10px;
 }
-
+#login2{
+	margin: 10px 0px;
+	width: 100px;
+	height: 40px;
+	background: aqua;
+	line-height: 40px;
+	border: 1px white solid;
+	box-sizing: border-box;
+}
 #loginform input {
-	width: 98%;
+	width: 97%;
 	height: 30px;
 	margin: 5px;
 	margin-left: -5px;

@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <div class="wrap">
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 	<img alt="logo" src="./img/rainbow.png">
 	<c:choose>
 		<c:when test="${sessionScope.id eq null}">
+		<div id="login2" style="width: 100%">로그인하기</div>
 			<div id="loginform">
 				<form action="./login" method="post">
 					<input type="text" name="id" placeholder="아이디를 입력 하세요" required="required"> 
@@ -12,6 +14,17 @@
 					<button type="submit">로그인하기</button>
 				</form>
 			</div>
+			
+			<script type="text/javascript">
+			$(document).ready(function(){
+				$("#loginform").hide();
+				$("#login2").click(function(){
+					$("#login2").hide();
+					$("#loginform").fadeIn("slow");
+				});
+			});	
+			</script>
+			
 		</c:when>
 		<c:otherwise>
 			${sessionScope.id }님 반갑습니다. 

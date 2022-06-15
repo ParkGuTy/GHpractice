@@ -28,6 +28,22 @@ public class BoardDAO {
 		return sqlSession.selectOne("board.totalCount");
 	}
 
+	public List<CommentDTO> commentList(int b_no) {
+		return sqlSession.selectList("board.commentList", b_no);
+	}
+
+	public void commentWrite(CommentDTO dto) {
+		sqlSession.insert("board.commentWrite", dto);
+	}
+
+	public void commentDelete(CommentDTO dto) {
+		sqlSession.delete("board.commentDelete", dto);
+	}
+
+	public void commentUpdate(CommentDTO dto) {
+		sqlSession.update("board.commentUpdate", dto);
+	}
+
 	
 }
 

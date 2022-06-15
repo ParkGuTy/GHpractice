@@ -37,34 +37,45 @@ public class LoginController {
 	}
 
 	// 로그인 로직 처리하기
+	
 	@PostMapping(value = "/login")
 	public String login(HttpServletRequest request) {
-		String id = request.getParameter("id");
-		String pw = request.getParameter("pw");
-
-		// dto에 담아서 데이터 베이스로 보내고 싶어요
-		LoginDTO dto = new LoginDTO();
-		dto.setU_id(id);
-		dto.setU_pw(pw);
-
-		// Service DAO도 만들어줄게요
-		dto = loginService.login(dto);
-		System.out.println("dto : " + dto);
-		if (dto != null) {
-
-			System.out.println(dto.getU_no());
-			System.out.println(dto.getU_joindate());
-			
-			//정상 로그인 = 세션 만들고
-			HttpSession session = request.getSession();
-			session.setMaxInactiveInterval(60*5); //초단위로 세션 유지시간을 지정
-			session.setAttribute("id", id);
-			System.out.println("생성된 세션 확인 : " + session.getAttribute("id"));
-
-			return "redirect:/board";
-		} else {
-			// 비정상 로그인 = 다시 로그인 하세요.
-			return "redirect:/login?error=1254";
-		}
-	}
+	      Long start = System.currentTimeMillis();
+	      
+	      try {         
+	         String id = request.getParameter("id");
+	         String pw = request.getParameter("pw");
+	         //System.out.println(id);
+	        // System.out.println(pw);
+	         //dto에 담아서 데이터베이스로 보내고 싶어요 
+	         LoginDTO dto = new LoginDTO();
+	         dto.setU_id(id);
+	         dto.setU_pw(pw);
+	         
+	         //Service DAO도 만들어줄게욤
+	         dto = loginService.login(dto);
+	         System.out.println("dto : " + dto);
+	         if(dto != null) {         
+	            //System.out.println(dto.getU_no());
+	            //System.out.println(dto.getU_date());
+	            
+	            //정상 로그인 = 세션만들고
+	            HttpSession session = request.getSession();
+	            session.setMaxInactiveInterval(15 * 60);//초단위로 세션 유지시간을 지정
+	            session.setAttribute("id", id);
+	            System.out.println("생성된 세션 확인 : " + session.getAttribute("id"));
+	            
+	            return "redirect:/board";
+	         }else {
+	            //비정상 로그인 = 다시 로그인하세요.
+	            return "redirect:/login?error=1254";
+	         }
+	         
+	      } finally {
+	         Long end = System.currentTimeMillis();
+	         Long time = end - start ;
+	         System.out.println(time + "ms");
+	      }
+	      
+	   }
 }
